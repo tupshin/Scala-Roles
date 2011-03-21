@@ -1,0 +1,15 @@
+     SCALA ROLES
+=====================
+
+Building:
+=========
+
+./build-lib.sh
+./build-examples.sh
+
+Running:
+========
+
+./run-examples
+(simply executes most of the examples)
+
