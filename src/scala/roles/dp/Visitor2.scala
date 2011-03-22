@@ -38,7 +38,7 @@ trait Visitor2 extends TransientCollaboration {
     def accept: Unit = {
       val core = element.coreOf(this)
       type ElementPlayer = core.type
-      visitor.visit[ElementPlayer](core.asInstanceOf[ElementPlayer]) // TODO is this cast necessary?
+      visitor.visit[ElementPlayer](core)
       val children = traverse(core)
       children.foreach(child => {
         (child -: element).accept

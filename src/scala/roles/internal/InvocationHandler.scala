@@ -155,10 +155,8 @@ class InvocationHandler(core: AnyRef, role: AnyRef, sharedIdentities: Boolean, b
           }
         })
       })
-   
       println("ERROR: method " + method + " not found in " + role + " or " + core) 
-      //FIXME what should the fall-through return really be?
-      return null
+      throw new InvocationTargetException();
     } catch {
       case e: InvocationTargetException => throw e.getTargetException() 
     }
