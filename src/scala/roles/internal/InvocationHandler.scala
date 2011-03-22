@@ -58,7 +58,7 @@ class InvocationHandler(core: AnyRef, role: AnyRef, sharedIdentities: Boolean, b
   /**
     Compares two method and returns true iff they have the same name, number of parameters and parameter types.
   */
-  protected def compare(m1: Method, m2: Method): boolean = {
+  protected def compare(m1: Method, m2: Method): Boolean = {
     //print("   comparing "+m1.getName+" with "+m2.getName+" : ")
     // name
     if (m1.getName != m2.getName) return false
@@ -78,7 +78,7 @@ class InvocationHandler(core: AnyRef, role: AnyRef, sharedIdentities: Boolean, b
     of type selfT. I.e. selfM is a variant of normalM that allows to pass
     a value for 'this' (aka 'self') to be used in the method implementation.
   */
-  protected def compareSelfMethod(normalM: Method, selfM: Method, selfT: String): boolean = {
+  protected def compareSelfMethod(normalM: Method, selfM: Method, selfT: String): Boolean = {
     // name
     if (normalM.getName != selfM.getName) return false
     // parameter types
@@ -157,6 +157,8 @@ class InvocationHandler(core: AnyRef, role: AnyRef, sharedIdentities: Boolean, b
       })
    
       println("ERROR: method " + method + " not found in " + role + " or " + core) 
+      //FIXME what should the fall-through return really be?
+      return null
     } catch {
       case e: InvocationTargetException => throw e.getTargetException() 
     }
@@ -180,7 +182,7 @@ class InvocationHandler(core: AnyRef, role: AnyRef, sharedIdentities: Boolean, b
         mapping.get(wildCarded(methodId)) match {
           case Some(l) => Some(l)
           case None    => // try encoding of private fields: "surroundingClass$$fieldName_$eq(fieldType)"
-            mapping.elements.find(e =>
+            mapping.iterator.find(e =>
                 e._1.contains("_$eq") && wildCarded(methodId).contains("$$"+ e._1.substring(0, e._1.indexOf('(')) +"(*)")) match {
               case Some(e: (String, List[() => Unit])) => Some(e._2)
               case None    => None

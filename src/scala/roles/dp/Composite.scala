@@ -5,6 +5,8 @@
 
 package scala.roles.dp;
 
+import scala.roles.TransientCollaboration
+
 trait Composite[Core <: AnyRef] extends TransientCollaboration {
   
   object parent extends RoleMapper[Core, Parent] {
@@ -22,7 +24,7 @@ trait Composite[Core <: AnyRef] extends TransientCollaboration {
       if (newChild.parentR != null) throw new Exception("Before adding this child, remove it from old parent: " + newChild.parentR)
       
       newChild.parentR = role
-      children += child.roleOf(newChild.core)
+      children :+ child.roleOf(newChild.core)
     }
     
     def getChild(i: Int): Child#Proxy = 
@@ -38,7 +40,7 @@ trait Composite[Core <: AnyRef] extends TransientCollaboration {
       // unbind child role from oldChild 
       child.unbind(oldChild)
       
-      children = children.remove(_ == oldChildR)
+      children = children.filterNot(_ == oldChildR)
     }
   }
   

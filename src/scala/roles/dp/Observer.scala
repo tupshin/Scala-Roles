@@ -6,6 +6,7 @@
 package scala.roles.dp
 
 import scala.collection.mutable.HashSet
+import scala.roles.TransientCollaboration
 
 /*
  A reusable implementation of the Observer pattern...

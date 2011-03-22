@@ -5,6 +5,8 @@
 
 package scala.roles.dp;
 
+import scala.roles.TransientCollaboration
+
 trait Visitor2 extends TransientCollaboration {
 
   // to be implemented by concrete visitor collaboration

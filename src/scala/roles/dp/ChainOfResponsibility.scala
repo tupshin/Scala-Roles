@@ -5,6 +5,8 @@
 
 package scala.roles.dp;
 
+import scala.roles.TransientCollaboration
+
 trait ChainOfResponsibility[HandlerPlayer <: Handler] extends TransientCollaboration {
   
   object handler extends RoleMapper[HandlerPlayer, HandlerRole] {

@@ -5,6 +5,8 @@
 
 package scala.roles.dp
 
+import scala.roles.TransientCollaboration
+
 trait Visitor extends TransientCollaboration {
 	
   object element extends RoleMapper[AnyRef, Element] {
