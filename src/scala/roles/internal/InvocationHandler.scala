@@ -155,8 +155,7 @@ class InvocationHandler(core: AnyRef, role: AnyRef, sharedIdentities: Boolean, b
           }
         })
       })
-      println("ERROR: method " + method + " not found in " + role + " or " + core) 
-      throw new InvocationTargetException();
+      throw new Exception("ERROR: method " + method + " not found in " + role + " or " + core);
     } catch {
       case e: InvocationTargetException => throw e.getTargetException() 
     }

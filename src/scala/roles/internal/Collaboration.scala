@@ -102,8 +102,8 @@ private[roles] trait Collaboration {
 
   trait TransientRole[Player <: AnyRef] extends AbstractRole[Player] {
     // -: reads 'as'
-    def -:(core: Player): this.type with HasCore[core.type] with core.type = {
-      playedBy(core).asInstanceOf[this.type with HasCore[core.type] with core.type]
+    def -:(core: Player): this.type with HasCore[Player] with Player = {
+      playedBy(core).asInstanceOf[this.type with HasCore[Player] with Player]
     }
   }
 
@@ -127,7 +127,7 @@ private[roles] trait Collaboration {
     // abstract factory method
     protected def createRole: RoleType
     
-    def -:(core: Player): RoleType with HasCore[core.type] with core.type = {
+    def -:(core: Player): RoleType with HasCore[Player] with Player = {
       core2role.get(core) match {
         case Some(role)  => (role playedBy core).asInstanceOf[RoleType with HasCore[core.type] with core.type]
         case None     => {

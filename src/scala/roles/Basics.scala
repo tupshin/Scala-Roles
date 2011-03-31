@@ -15,7 +15,7 @@ object Basics {
   trait HasAs[P <: AnyRef] {
     val core: P
     
-    def as(role: TransientCollaboration#Role[P]): core.type with role.type = 
+    def as(role: TransientCollaboration#Role[P]): core.type with TransientCollaboration#Role[P] = 
       (core -: role).asInstanceOf[core.type with role.type]
 
     def as[R <: TransientCollaboration#AbstractRole[P]](rolemapper: TransientCollaboration#RoleMapper[P, R]): R with core.type =
