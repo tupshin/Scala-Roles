@@ -43,7 +43,7 @@ trait Book {
   def borrow = { status = "borrowed" }
   def returnIt = { status = "available" }
   def returnIt(msg: String) = { status = "available" }
-  def returnIt(msg: String, delay: int) = { status = "available" }
+  def returnIt(msg: String, delay: Int) = { status = "available" }
   def turnPage = {}
 }
 
